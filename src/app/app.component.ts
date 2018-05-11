@@ -47,6 +47,7 @@ export class AppComponent implements AfterViewInit {
           }]
       },
       options: {
+        responsive: false,
           scales: {
               yAxes: [{
                   ticks: {
@@ -57,4 +58,10 @@ export class AppComponent implements AfterViewInit {
       }
   });
   }
+
+  // レスポンシた対応がデフォルトで true になっていたのが原因みたい
+  // width,height 指定しても 無視しやがる。
+  // この辺参考になった
+  // https://hacknote.jp/archives/31226/
+  // https://obel.hatenablog.jp/entry/20160626/1466937585
 }
