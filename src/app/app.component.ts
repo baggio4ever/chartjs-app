@@ -85,7 +85,7 @@ export class AppComponent implements AfterViewInit {
       const highest = [12, 25.5, 3, 5, 2, 3];
       const lowest = [2, 9, -3, -5, -2, -10.8];
       const rain24h = [1.2, 1.9, 0.3, 0.5, 0.2, 0.3];
-      const snow = [2, 9, 5, 0, 0, 3];
+      const snow = [20, 190, 120, 0, 18, 3];
 
       this.myChart2 = new Chart(this.context2, {
           type: 'bar',
@@ -99,7 +99,8 @@ export class AppComponent implements AfterViewInit {
                   borderColor: 'rgba(255,10,10,0.5)',
                   pointBackgroundColor: "rgba(255,10,10,0.2)",
                   borderWidth: 2,
-                  fill: false
+                  fill: false,
+                  yAxisID: "y-axis-1",
               },
               {
                   type: 'line',
@@ -109,7 +110,8 @@ export class AppComponent implements AfterViewInit {
                   borderColor: 'rgba(10,10,255,0.5)',
                   pointBackgroundColor: 'rgba(10,10,255,0.2)',
                   borderWidth: 2,
-                  fill: false
+                  fill: false,
+                  yAxisID: "y-axis-1",
               },
               {
                   type: 'bar',
@@ -117,7 +119,8 @@ export class AppComponent implements AfterViewInit {
                   data: rain24h,
                   backgroundColor: 'rgba(54, 162, 235, 0.2)',
                   borderColor: 'rgba(54, 162, 235, 1)',
-                  borderWidth: 1
+                  borderWidth: 1,
+                  yAxisID: "y-axis-2",
               },
               {
                   type: 'bar',
@@ -125,17 +128,35 @@ export class AppComponent implements AfterViewInit {
                   data: snow,
                   backgroundColor: 'rgba(50, 50, 50, 0.2)',
                   borderColor: 'rgba(50, 50, 50, 1)',
-                  borderWidth: 1
+                  borderWidth: 1,
+                  yAxisID: "y-axis-2",
               }]
           },
           options: {
               responsive: false,
               scales: {
                   yAxes: [{
+                      id: "y-axis-1",   // Y軸のID
+                      type: "linear",   // linear固定 
+                      position: "left", // どちら側に表示される軸か？
+                      ticks: {          // スケール
+                          max: 35,
+                          min: -30,
+                          stepSize: 5
+                      },
+                  }, {
+                      id: "y-axis-2",
+                      type: "linear",
+                      position: "right",
                       ticks: {
-                          beginAtZero: false
-                      }
-                  }]
+                          max: 300,
+                          min: 0,
+                          stepSize: 100
+                      },
+                      gridLines: {
+                          drawOnChartArea: false,
+                        },
+                  }],
               }
           }
       });
@@ -154,4 +175,8 @@ export class AppComponent implements AfterViewInit {
   // この辺参考になった
   // https://hacknote.jp/archives/31226/
   // https://obel.hatenablog.jp/entry/20160626/1466937585
+
+
+  // めちゃんこ参考になりました
+  // https://qiita.com/kd9951/items/aece80abe0bd42b3b5d3
 }
