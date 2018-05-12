@@ -81,42 +81,48 @@ export class AppComponent implements AfterViewInit {
           }
       });
 
+      const labels = ['5/1', '5/2', '5/3', '5/4', '5/5', '5/6'];
+      const highest = [12, 25.5, 3, 5, 2, 3];
+      const lowest = [2, 9, -3, -5, -2, -10.8];
+      const rain24h = [1.2, 1.9, 0.3, 0.5, 0.2, 0.3];
+      const snow = [2, 9, 5, 0, 0, 3];
+
       this.myChart2 = new Chart(this.context2, {
           type: 'bar',
           data: {
-              labels: ['5/1', '5/2', '5/3', '5/4', '5/5', '5/6'],
+              labels: labels,
               datasets: [{
                   type: 'line',
-                  label: '最高気温',
-                  data: [12, 19, 3, 5, 2, 3],
+                  label: '最高気温[℃]',
+                  data: highest,
                   backgroundColor: 'rgba(255,10,10,0.2)',
-                  borderColor: 'rgba(255,10,10,1)',
+                  borderColor: 'rgba(255,10,10,0.5)',
                   pointBackgroundColor: "rgba(255,10,10,0.2)",
-                  borderWidth: 1,
+                  borderWidth: 2,
                   fill: false
               },
               {
                   type: 'line',
-                  label: '最低気温',
-                  data: [2, 9, -3, -5, -2, -3],
+                  label: '最低気温[℃]',
+                  data: lowest,
                   backgroundColor: 'rgba(10,10,255,0.2)',
-                  borderColor: 'rgba(10,10,255,1)',
+                  borderColor: 'rgba(10,10,255,0.5)',
                   pointBackgroundColor: 'rgba(10,10,255,0.2)',
-                  borderWidth: 1,
+                  borderWidth: 2,
                   fill: false
               },
               {
                   type: 'bar',
-                  label: '24h降水量',
-                  data: [1.2, 1.9, 0.3, 0.5, 0.2, 0.3],
+                  label: '24h降水量[mm]',
+                  data: rain24h,
                   backgroundColor: 'rgba(54, 162, 235, 0.2)',
                   borderColor: 'rgba(54, 162, 235, 1)',
                   borderWidth: 1
               },
               {
                   type: 'bar',
-                  label: '積雪量',
-                  data: [2, 9, 5, 0, 0, 3],
+                  label: '積雪量[cm]',
+                  data: snow,
                   backgroundColor: 'rgba(50, 50, 50, 0.2)',
                   borderColor: 'rgba(50, 50, 50, 1)',
                   borderWidth: 1
@@ -133,7 +139,15 @@ export class AppComponent implements AfterViewInit {
               }
           }
       });
-}
+    }
+
+    test() {
+        console.log('test!');
+        console.log(this.myChart2.data.labels);
+        for(let i=0;i<this.myChart2.data.datasets.length;i++) {
+            console.log(this.myChart2.data.datasets[i].data);
+        }
+    }
 
   // レスポンシた対応がデフォルトで true になっていたのが原因みたい
   // width,height 指定しても 無視しやがる。
