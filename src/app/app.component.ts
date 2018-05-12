@@ -10,12 +10,15 @@ export class AppComponent implements AfterViewInit {
 
   context: CanvasRenderingContext2D;
   context2: CanvasRenderingContext2D;
+  context3: CanvasRenderingContext2D;
 
   myChart = null;
   myChart2 = null;
+  myChart3 = null;
 
   @ViewChild('myChart') myCanvas;
   @ViewChild('myChart2') myCanvas2;
+  @ViewChild('myChart3') myCanvas3;
 
   ngAfterViewInit() {
 
@@ -24,6 +27,9 @@ export class AppComponent implements AfterViewInit {
 
     const canvas2 = this.myCanvas2.nativeElement;
     this.context2 = canvas2.getContext('2d');
+
+    const canvas3 = this.myCanvas3.nativeElement;
+    this.context3 = canvas3.getContext('2d');
 
       this.myChart = new Chart(this.context, {
           type: 'bar',
@@ -81,6 +87,8 @@ export class AppComponent implements AfterViewInit {
           }
       });
 
+
+
       const labels = ['5/1', '5/2', '5/3', '5/4', '5/5', '5/6'];
       const highest = [12, 25.5, 3, 5, 2, 3];
       const lowest = [2, 9, -3, -5, -2, -10.8];
@@ -106,6 +114,7 @@ export class AppComponent implements AfterViewInit {
                   type: 'line',
                   label: '最低気温[℃]',
                   data: lowest,
+                  pointStyle: 'triangle',
                   backgroundColor: 'rgba(10,10,255,0.2)',
                   borderColor: 'rgba(10,10,255,0.5)',
                   pointBackgroundColor: 'rgba(10,10,255,0.2)',
@@ -134,6 +143,16 @@ export class AppComponent implements AfterViewInit {
           },
           options: {
               responsive: false,
+              title: {
+                  display: true,
+                  text: 'XXX の　情報',
+              },
+              legend: {
+                position: 'bottom',
+                labels: {
+                    boxWidth: 20,
+                }
+              },
               scales: {
                   yAxes: [{
                       id: "y-axis-1",   // Y軸のID
@@ -160,11 +179,25 @@ export class AppComponent implements AfterViewInit {
               }
           }
       });
+
+      this.myChart3 = new Chart(this.context3, {
+        type: 'horizontalBar',
+        data: {
+            labels: ['A','B','C','D','E','F'],
+            datasets: [{
+                label: 'なんじゃいの',
+                data: [10,15,28,13,0,5],
+            }]
+        },
+        options: {
+            responsive: false,
+        }
+        });
     }
 
     test() {
-        console.log('test!');
         console.log(this.myChart2.data.labels);
+
         for(let i=0;i<this.myChart2.data.datasets.length;i++) {
             console.log(this.myChart2.data.datasets[i].data);
         }
