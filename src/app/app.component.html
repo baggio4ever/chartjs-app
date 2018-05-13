@@ -12,6 +12,8 @@
   <canvas #myChart3 class="cha3"></canvas>
 </div>
 
-<app-jw-chart></app-jw-chart>
+<app-jw-chart #jwChart1 caption="abc"></app-jw-chart>
+<button (click)="test2(jwChart1)">へいへいtest!</button>
 
-<app-jw-chart></app-jw-chart>
+<app-jw-chart #jwChart2></app-jw-chart>
+<button (click)="test3(jwChart2)">こっちもtest!</button>

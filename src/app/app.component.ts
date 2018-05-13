@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import {Chart} from 'chart.js';
+import { JwChartComponent } from './jw-chart/jw-chart.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,8 @@ export class AppComponent implements AfterViewInit {
     @ViewChild('myChart') myCanvas;
     @ViewChild('myChart2') myCanvas2;
     @ViewChild('myChart3') myCanvas3;
+
+    @ViewChild('jwChart1') jwChart1:JwChartComponent;
 
     labels = ['5/1', '5/2', '5/3', '5/4', '5/5', '5/6'];
     highest = [12, 25.5, 3, 5, 2, 3];
@@ -225,6 +228,64 @@ export class AppComponent implements AfterViewInit {
 
         // 反映
         this.myChart2.update();
+    }
+
+    test2(chart:JwChartComponent) {
+        // 最高気温 ランダム生成
+        const arr = [];
+        for( let i=0;i<this.labels.length;i++ ) {
+            let v = Math.random() * 50 - 15;
+            v = Math.round(v*10)/10;
+            arr.push(v);
+        }
+//        this.jwChart1.highest = arr;
+
+//        this.jwChart1.update();
+        chart.highest = arr;
+        chart.update();
+    }
+
+    test3(chart:JwChartComponent) {
+
+        chart.labels = ['8/1','8/2','8/3','8/4','8/5','8/6','8/7','8/8','8/9','8/10']
+
+        // 最高気温 ランダム生成
+        const arr = [];
+        for( let i=0;i<chart.labels.length;i++ ) {
+            let v = Math.random() * 50 - 15;
+            v = Math.round(v*10)/10;
+            arr.push(v);
+        }
+        chart.highest = arr;
+
+        // 最低気温 ランダム生成
+        const arr2 = [];
+        for( let i=0;i<chart.labels.length;i++ ) {
+            let v = Math.random() * 50 - 25;
+            v = Math.round(v*10)/10;
+            arr2.push(v);
+        }
+        chart.lowest = arr2;
+
+        // 降水量 ランダム生成
+        const arr3 = [];
+        for( let i=0;i<chart.labels.length;i++ ) {
+            let v = Math.random() * 100;
+            v = Math.round(v);
+            arr3.push(v);
+        }
+        chart.rain24h = arr3;
+
+        // 積雪量 ランダム生成
+        const arr4 = [];
+        for( let i=0;i<this.labels.length;i++ ) {
+            let v = Math.random() * 100;
+            v = Math.round(v);
+            arr4.push(v);
+        }
+        chart.snow = arr4;
+
+        chart.update();
     }
 
   // レスポンシた対応がデフォルトで true になっていたのが原因みたい
