@@ -7,7 +7,7 @@ import {Chart} from 'chart.js';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit {
-
+    
     context: CanvasRenderingContext2D;
     context2: CanvasRenderingContext2D;
     context3: CanvasRenderingContext2D;
